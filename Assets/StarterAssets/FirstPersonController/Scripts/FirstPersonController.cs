@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
+using Unity.Netcode;
 #endif
 
 namespace StarterAssets
@@ -9,7 +10,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM
 	[RequireComponent(typeof(PlayerInput))]
 #endif
-	public class FirstPersonController : MonoBehaviour
+	public class FirstPersonController : NetworkBehaviour
 	{
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
@@ -55,7 +56,7 @@ namespace StarterAssets
 		private float _cinemachineTargetPitch;
 
 		// player
-		private float _speed;
+		[SerializeField] private float _speed;
 		private float _rotationVelocity;
 		private float _verticalVelocity;
 		private float _terminalVelocity = 53.0f;
@@ -63,6 +64,9 @@ namespace StarterAssets
 		// timeout deltatime
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
+
+		//Animator
+		private Animator animator;
 
 	
 #if ENABLE_INPUT_SYSTEM
@@ -99,6 +103,7 @@ namespace StarterAssets
 		{
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
+			animator = GetComponent<Animator>();
 #if ENABLE_INPUT_SYSTEM
 			_playerInput = GetComponent<PlayerInput>();
 #else
@@ -112,6 +117,7 @@ namespace StarterAssets
 
 		private void Update()
 		{
+			//if (!IsOwner) return;
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
@@ -127,6 +133,7 @@ namespace StarterAssets
 			// set sphere position, with offset
 			Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
 			Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
+			animator.SetBool("Grounded", Grounded);
 		}
 
 		private void CameraRotation()
@@ -177,10 +184,12 @@ namespace StarterAssets
 
 				// round speed to 3 decimal places
 				_speed = Mathf.Round(_speed * 1000f) / 1000f;
+				animator.SetFloat("Speed", _speed);
 			}
 			else
 			{
 				_speed = targetSpeed;
+				animator.SetFloat("Speed", _speed);
 			}
 
 			// normalise input direction
