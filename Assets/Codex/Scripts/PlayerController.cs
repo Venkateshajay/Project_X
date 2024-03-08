@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     PlayerInput playerInput;
-
+    public Items item;
     public void ImmobilizePlayer()
     {
         playerInput.enabled = false;
@@ -16,5 +16,14 @@ public class PlayerController : MonoBehaviour
     public void MobilizePlayer()
     {
         playerInput.enabled = true;
+    }
+
+    public void OnInteract()
+    {
+        Debug.Log("E");
+        if(item != null)
+        {
+            item.Interact();
+        }
     }
 }
