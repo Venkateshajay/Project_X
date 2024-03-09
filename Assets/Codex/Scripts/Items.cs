@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Items : MonoBehaviour , Interactables
 {
+    [SerializeField] ItemsData itemData;
     public enum ItemState
     {
         Pickable,
@@ -19,7 +20,25 @@ public class Items : MonoBehaviour , Interactables
 
     public void Interact()
     {
+        if(itemState == ItemState.Pickable)
+        {
+            Pick();
+        }
+        else
+        {
+            See();
+        }
         Debug.Log("Interaction successfull");
+    }
+
+    private void Pick()
+    {
+
+    }
+
+    private void See()
+    {
+
     }
 
     private void OnTriggerEnter(Collider other)
