@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ReadableItems : MonoBehaviour, InventoryItems
 {
+ 
     public bool CanUse()
     {
         return true;
@@ -12,5 +13,10 @@ public class ReadableItems : MonoBehaviour, InventoryItems
     public void Consume()
     {
         Debug.Log("Document's panel opened");
+    }
+
+    public int GetUseId()
+    {
+        return 0;
     }
 }

@@ -10,8 +10,8 @@ public class ItemInstance
     {
         switch (itemData.itemName)
         {
-            case "key":
-                Key key = new Key();
+            case "Key":
+                Key key = new Key(itemData.useId);
                 itemObject = key;
                 break;
 

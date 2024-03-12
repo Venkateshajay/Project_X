@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TorchLight :  InventoryItems
 {
-    public bool canUse;
+    public bool canUse = true;
     public void Consume()
     {
         Debug.Log("Torch Light used");
@@ -13,5 +13,10 @@ public class TorchLight :  InventoryItems
     public bool CanUse()
     {
         return canUse;
+    }
+
+    public int GetUseId()
+    {
+        return 0;
     }
 }

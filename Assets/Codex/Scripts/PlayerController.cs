@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 {
     PlayerInput playerInput;
     public Items item;
+    public Doors door;
+    private InventoryManager inventory;
     public void ImmobilizePlayer()
     {
         playerInput.enabled = false;
@@ -24,6 +26,14 @@ public class PlayerController : MonoBehaviour
         if(item != null)
         {
             item.Interact();
+        }else if(door != null)
+        {
+            door.Interact();
         }
+    }
+
+    public bool CheckForKeys(int id)
+    {
+        return inventory.CheckForKeys(id);
     }
 }
