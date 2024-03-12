@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bfcce62f1c0f0c42846a7a7e305b271, type: 3}
+  m_Name: Torch Light
+  m_EditorClassIdentifier: 
+  itemName: Torch Light
+  icon: {fileID: 0}
+  description: A old flash light used to illuminate dark places

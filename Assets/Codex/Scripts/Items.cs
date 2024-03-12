@@ -5,6 +5,12 @@ using UnityEngine;
 public class Items : MonoBehaviour , Interactables
 {
     [SerializeField] ItemsData itemData;
+    [SerializeField] InventoryManager inventory;
+
+    void Start()
+    {
+        inventory = FindObjectOfType<InventoryManager>().GetComponent<InventoryManager>();
+    }
     public enum ItemState
     {
         Pickable,
@@ -33,7 +39,19 @@ public class Items : MonoBehaviour , Interactables
 
     private void Pick()
     {
-
+        ItemInstance itemInstance = new ItemInstance(itemData);
+        if (inventory == null)
+        {
+            Debug.Log("inventory is null");
+            return;
+        }else if(itemInstance == null)
+        {
+            Debug.Log("Instance is null");
+            return;
+        }
+        inventory.Add(itemData);
+        Debug.Log("Item added to inventory");
+        Destroy(gameObject);
     }
 
     private void See()

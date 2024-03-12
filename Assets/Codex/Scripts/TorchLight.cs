@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TorchLight :MonoBehaviour, InventoryItems
+public class TorchLight :  InventoryItems
 {
     public bool canUse;
     public void Consume()

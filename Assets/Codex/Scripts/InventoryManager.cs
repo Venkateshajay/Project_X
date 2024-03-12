@@ -4,15 +4,34 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {   
-    private InventoryItems[] items;
-    private int itemIndex;
+    private List<ItemInstance> items = new List<ItemInstance>();
+    [SerializeField]private int itemIndex;
 
-    private void Update()
+    /*private void Update()
     {
-        if (items[itemIndex].CanUse() && Input.GetKeyDown(KeyCode.F))
+        if (items[itemIndex].itemObject.CanUse() && Input.GetKeyDown(KeyCode.F))
         {
             Debug.Log("Object used");
-            items[itemIndex].Consume();
+            items[itemIndex].itemObject.Consume();
         }
+    }*/
+
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.H))
+       Debug.Log(items[itemIndex].item.itemName);
+    }
+    public void UseItem()
+    {
+        if (items[itemIndex].itemObject.CanUse())
+        {
+            Debug.Log("Object used");
+            items[itemIndex].itemObject.Consume();
+        }
+    }
+
+    public void Add(ItemsData itemInstance)
+    {
+        items.Add(new ItemInstance(itemInstance));
     }
 }

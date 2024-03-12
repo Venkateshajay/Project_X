@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Key :MonoBehaviour, InventoryItems
+public class Key : InventoryItems
 {
     public bool canUse;
     public void Consume()
