@@ -10,6 +10,11 @@ public class PlayerController : MonoBehaviour
     public Items item;
     public Doors door;
     private InventoryManager inventory;
+
+    private void Start()
+    {
+        inventory = FindObjectOfType<InventoryManager>();
+    }
     public void ImmobilizePlayer()
     {
         playerInput.enabled = false;

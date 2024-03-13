@@ -6,7 +6,8 @@ using UnityEngine;
 public class Doors : MonoBehaviour , Interactables
 {
     PlayerController player;
-    private int keyId;
+    [SerializeField] private int keyId;
+    private BoxCollider boxCollider;
     public enum DoorState
     {
         Locked,
@@ -15,6 +16,11 @@ public class Doors : MonoBehaviour , Interactables
     }
     [SerializeField] DoorState doorState;
     private bool canInteract = true;
+
+    private void Start()
+    {
+        boxCollider = gameObject.transform.GetChild(0).GetComponent<BoxCollider>();
+    }
     public bool CanInteract()
     {
         return canInteract;
@@ -54,6 +60,7 @@ public class Doors : MonoBehaviour , Interactables
 
     private void OpenDoor()
     {
+        boxCollider.enabled = false;
         Debug.Log("Door Opened");
     }
     private void OnTriggerEnter(Collider other)

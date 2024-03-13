@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bfcce62f1c0f0c42846a7a7e305b271, type: 3}
   m_Name: Key
   m_EditorClassIdentifier: 
+  useId: 1
   itemName: Key
   icon: {fileID: 0}
   description: Key used to open a door
