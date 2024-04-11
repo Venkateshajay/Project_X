@@ -7,7 +7,7 @@ public class Doors : MonoBehaviour , Interactables
 {
     PlayerController player;
     [SerializeField] private int keyId;
-    private BoxCollider boxCollider;
+    private MeshCollider[] boxColliders = new MeshCollider[5];
     public enum DoorState
     {
         Locked,
@@ -19,7 +19,8 @@ public class Doors : MonoBehaviour , Interactables
 
     private void Start()
     {
-        boxCollider = gameObject.transform.GetChild(0).GetComponent<BoxCollider>();
+        boxColliders = gameObject.GetComponentsInChildren<MeshCollider>();     
+        
     }
     public bool CanInteract()
     {
@@ -60,7 +61,11 @@ public class Doors : MonoBehaviour , Interactables
 
     private void OpenDoor()
     {
-        boxCollider.enabled = false;
+        for (int i = 0; i < boxColliders.Length; i++)
+        {
+            boxColliders[i].enabled = false;
+        }
+        doorState = DoorState.Unlocked;
         Debug.Log("Door Opened");
     }
     private void OnTriggerEnter(Collider other)
