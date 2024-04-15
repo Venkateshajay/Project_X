@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour
         audioclips = GetComponent<AudioClips>();
         audioSource = GetComponent<AudioSource>();
         ChangeAudioClip(0);
+        Play();
     }
 
     public void ChangeAudioClip(int index)

@@ -67,6 +67,7 @@ namespace StarterAssets
 
 		//Animator
 		private Animator animator;
+		private PlayerAudio playerAudio;
 
 	
 #if ENABLE_INPUT_SYSTEM
@@ -97,10 +98,12 @@ namespace StarterAssets
 			{
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 			}
+			
 		}
 
 		private void Start()
 		{
+			playerAudio = GetComponent<PlayerAudio>();
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
 			animator = GetComponent<Animator>();
@@ -185,11 +188,13 @@ namespace StarterAssets
 				// round speed to 3 decimal places
 				_speed = Mathf.Round(_speed * 1000f) / 1000f;
 				animator.SetFloat("Speed", _speed);
+				playerAudio.speed = _speed;
 			}
 			else
 			{
 				_speed = targetSpeed;
 				animator.SetFloat("Speed", _speed);
+				playerAudio.speed = _speed;
 			}
 
 			// normalise input direction

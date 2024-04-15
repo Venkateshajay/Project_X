@@ -8,6 +8,8 @@ public class Doors : MonoBehaviour , Interactables
     PlayerController player;
     [SerializeField] private int keyId;
     private MeshCollider[] boxColliders = new MeshCollider[5];
+    Animator[] animators;
+    AudioSource audioSource;
     public enum DoorState
     {
         Locked,
@@ -19,8 +21,9 @@ public class Doors : MonoBehaviour , Interactables
 
     private void Start()
     {
-        boxColliders = gameObject.GetComponentsInChildren<MeshCollider>();     
-        
+        audioSource = GetComponent<AudioSource>();
+        boxColliders = gameObject.GetComponentsInChildren<MeshCollider>();
+        animators = gameObject.GetComponentsInChildren<Animator>();
     }
     public bool CanInteract()
     {
@@ -61,12 +64,18 @@ public class Doors : MonoBehaviour , Interactables
 
     private void OpenDoor()
     {
-        for (int i = 0; i < boxColliders.Length; i++)
+        /*for (int i = 0; i < boxColliders.Length; i++)
         {
             boxColliders[i].enabled = false;
+        }*/
+        for(int i = 0; i < animators.Length; i++)
+        {
+            bool value = animators[i].GetBool("OpenOrClose");
+            animators[i].SetBool("OpenOrClose", !value);
         }
         doorState = DoorState.Unlocked;
         Debug.Log("Door Opened");
+        audioSource.Play();
     }
     private void OnTriggerEnter(Collider other)
     {
